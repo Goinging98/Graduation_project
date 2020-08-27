@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<meta charset="utf-8">
+<title>밥먹고뭐하니?</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .topnav-right {
+    float: right;
+  }
+  </style>
+
+
+<div id="header">
+     <a href="/"><img src="/img/logo.jpg" height="100" width="200"/></a>
+</div>
+
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* style the container */
+.container {
+  position: relative;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px 0px 30px 0;
+}
+
+/* style inputs and link buttons */
+input,
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+
+input:hover,
+.btn:hover {
+  opacity: 1;
+}
+
+/* add appropriate colors to fb, twitter and google buttons */
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background-color: #55ACEE;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+
+/* style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Two-column layout */
+.col {
+  float: left;
+  width: 50%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* vertical line */
+.vl {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: 2px solid #ddd;
+  height: 175px;
+}
+
+/* text inside the vertical line */
+.vl-innertext {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 8px 10px;
+}
+
+/* hide some text on medium and large screens */
+.hide-md-lg {
+  display: none;
+}
+
+/* bottom container */
+.bottom-container {
+  text-align: center;
+  background-color: #666;
+  border-radius: 0px 0px 4px 4px;
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+  .col {
+    width: 100%;
+    margin-top: 0;
+  }
+  /* hide the vertical line */
+  .vl {
+    display: none;
+  }
+  /* show the hidden text on small screens */
+  .hide-md-lg {
+    display: block;
+    text-align: center;
+  }
+}
+</style>
+
+
+<div class="topnav">
+  <a class="active" href="/">Home</a>
+  <a href="#news">News</a>
+  <a href="/contactUs">Contact</a>
+  <div class="topnav-right">
+    <a href="/aboutUs">About</a>
+    <a href="/login">log-in</a>
+  </div>
+</div>
+
+</head>
+<body>
+
+<h1 align = "middle">로그인페이지 </h1>
+
+<h2>Responsive Social Login Form</h2>
+<p>Resize the browser window to see the responsive effect. When the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other.</p>
+
+<div class="container">
+    <div class="row">
+      <h2 style="text-align:center">Login with Social Media or Manually</h2>
+      <div class="vl">
+        <span class="vl-innertext">or</span>
+      </div>
+
+      <div class="col">
+
+        <a href="https://accounts.google.com/signin/v2/identifier?hl=en&passive=true&continue=https%3A%2F%2Fwww.google.co.kr%2Fsearch%3Fsource%3Dhp%26ei%3DsLQ8X5yRA4HSmAW9rqDgAw%26q%3Dhtml%2B%25EC%2582%25AC%25EC%259D%25B4%25ED%258A%25B8%2B%25EC%2597%25B0%25EA%25B2%25B0%26oq%3Dhtml%2B%25EC%2582%25AC%25EC%259D%25B4%25ED%258A%25B8%2B%25EC%2597%25B0%25EA%25B2%25B0%26gs_lcp%3DCgZwc3ktYWIQAzICCAA6CwguEMcBEKMCEJMCOggILhDHARCjAjoCCC46BQgAELEDOgYIABAIEB5KBQgHEgExSgUICBIBMVCMB1jxJGDxJ2gAcAB4AIABgwGIAYQQkgEEMC4xOJgBAKABAaoBB2d3cy13aXo%26sclient%3Dpsy-ab%26ved%3D0ahUKEwicqc3gwKbrAhUBKaYKHT0XCDwQ4dUDCAo%26uact%3D5&ec=%0000000&flowName=GlifWebSignIn&flowEntry=ServiceLogin" class="google btn"><i class="fa fa-google fa-fw">
+          </i> Login with Google+
+        </a>
+      </div>
+
+
+<div class="col">
+  <div class="hide-md-lg">
+    <p>Or sign in manually:</p>
+  </div>
+
+  <% if (messages.error) { %>
+    <%= messages.error %>
+  <% } %>
+
+  <form action="/login" method="POST">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit"><h2>Login</h2></button>
+  </form>
+</div>
+
+</div>
+</div>
+
+<div class="bottom-container">
+  <div class="row">
+    <div class="col">
+      <a href="/register" style="color:white" class="btn">Register</a>
+    </div>
+    <div class="col">
+      <label style="color:white" class="btn">Forgot password?</label>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
