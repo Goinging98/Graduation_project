@@ -1,0 +1,252 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+body {
+   margin: 0;
+   overflow-x: hidden; 
+   font-family: Arial, Helvetica, sans-serif;
+   background: #f1f1f1;
+  }
+
+/* 첫 메인 페이지 도입 메뉴바 */
+header { 
+   height : 100px;
+   background: #011638 ;
+   font-weight : bold;
+   display : flex;
+   justify-content: space-between;
+   align-items: center;
+   top:0;
+   left: 0;
+   right: 0;
+   border-bottom: 0.5px solid #333333;
+}
+
+
+.row:after {
+   content: "";
+   display: table;
+   clear: both;
+  }
+
+
+
+.video {
+   position: relative;
+   width: 100%;
+   padding-bottom: 56.25%;
+   overflow: hidden;
+}
+.video iframe {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+  }
+
+/*index.ejs*/
+* {
+   box-sizing:border-box;
+  }
+  
+  .container {
+   overflow: hidden;
+   padding: 10% 15% 10% 15%;
+   text-decoration: none;
+   /* position: fixed; */
+  }
+  
+
+  
+  .column-66 {
+   float: left;
+   width: 52%;
+  }
+  
+  .column-33 {
+   float: left;
+   width: 48%;
+  }
+
+  .address {
+   height:190px;
+   background:#282A2B;
+   color:#9d9fa0;
+   font-size:15px;
+    font-family: 'NanumSquare', sans-serif;
+   padding-left: 15%;
+   padding-top: 40px;
+   padding-bottom: 10px;
+   border-top: 0.5px solid #333333;
+  }
+
+  
+  
+
+
+  /* topNavi */
+  .logg {
+   padding: 15px;
+   align-items: center;
+   float: left; 
+  }
+
+  .title {
+   align-items: center;
+   float: left;
+   font-size: 20px;
+    font-family: 'NanumSquare', sans-serif;
+   font-weight: 800;
+  }
+  .logo_top{
+     padding-left: 15%;
+  }
+  .logo{
+     width: 400px;   
+  }
+  .aaa {
+     padding-right: 15%;
+     padding-top: 1%;
+     padding-bottom: 1%;
+  }
+
+  .info_txt {
+   font-family: 'NanumSquare', sans-serif;
+   font-size: 17px;
+   color: #FFFFFF;
+  }
+
+  a:link {
+   font-family: 'NanumSquare', sans-serif;
+   color : #FFFFFF;
+   text-decoration: none;
+   font-size: 25px;
+  }
+  a:visited {
+     color : #FFFFFF;
+     font-weight: bold;
+  }
+  a:hover{
+     color:#FCBE32;
+  }
+
+
+
+
+  /* container each part */
+  .txt_black{
+     font-family: 'NanumSquare', sans-serif;
+     font-size: 42px;
+     font-weight:800;
+     line-height: 160%;
+  }
+
+  .txt_white{
+   font-family: 'NanumSquare', sans-serif;
+   font-size: 42px;
+   font-weight:800;
+   line-height: 160%;
+   color:#f1f1f1;
+}
+
+  .explain_white{
+   font-family: 'NanumSquare', sans-serif;
+   font-size: 24px;
+   font-weight:400;
+   line-height: 160%;
+   color:#f1f1f1;
+  }
+  .explain_black{
+   font-family: 'NanumSquare', sans-serif;
+   font-size: 24px;
+   font-weight:400;
+   line-height: 160%;
+   color:#111111;
+  }
+
+  
+  .large-font {
+   font-size: 48px;
+  }
+  
+  .xlarge-font {
+   font-size: 64px   
+  }
+  
+  
+  .bellow_box {
+   padding: 100px 15%;
+   border-radius: 2em;
+  }
+
+  .button {
+   border: solid 2.5px #f1f1f1;
+   width: 250px;
+   color: #011638;
+   padding: 14px 28px;
+   font-size: 20px;
+   font-family: 'NanumSquare', sans-serif;
+   cursor: pointer;
+   background-color: #FCBE32;
+   text-align: center;
+   margin: 0 auto;
+  }
+  
+  img {
+   display: block;
+   height: auto;
+  }
+  
+/* 로그인 */
+#login_wrapper {
+   font-family: 'NanumSquare', sans-serif;
+   font-weight: 800;
+}
+
+
+  /* 미디어 쿼리 1300px 이하 650px 이상이면 아래처럼 적용 */
+  @media screen and (max-width: 1300px) {
+   .column-66, .column-33 {
+     width: 100%;
+     text-align: center;
+   }
+   .column-66_big, .column-33_big{
+      width: 65%;
+      margin: auto;
+      text-align: center;
+   }
+
+   .logo_top{
+      padding-left: 15%;
+   }
+   .logo{
+      width: 30px;   
+   }
+   
+   img {
+     margin: auto;
+     width: 80%;
+   }
+
+   .incizor_logo{
+      width: 130px;
+   }
+
+   .address{
+      height: 190px;
+      padding-top: 40px;
+      padding-bottom: 10px;
+      padding-left: 15%;
+      border-top: 0.5px;
+   }
+
+   .txt_black, .txt_white{
+      text-align: center;
+   }
+   .explain_black, .explain_white{
+      text-align: center;
+      margin-bottom: 100px;
+   }
+   .aaa{
+      display: block;
+   }
+
+  }

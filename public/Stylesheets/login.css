@@ -1,0 +1,118 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+body {
+   margin: 0;
+   overflow-x: hidden; 
+   font-family: Arial, Helvetica, sans-serif;
+   background: #f1f1f1;
+  }
+
+/* 첫 메인 페이지 도입 메뉴바 */
+header { 
+   height : 100px;
+   /* padding : 1rem; */
+   background: #011638 ;
+   font-weight : bold;
+   display : flex;
+   /* padding: 10px; */
+   justify-content: space-between;
+   align-items: center;
+   /* position: fixed; */
+   top:0;
+   left: 0;
+   right: 0;
+   border-bottom: 0.5px solid #333333;
+}
+
+
+.row:after {
+   content: "";
+   display: table;
+   clear: both;
+  }
+
+
+
+
+/*index.ejs*/
+* {
+   box-sizing:border-box;
+  }
+  
+ 
+  .address {
+   height:190px;
+   background:#282A2B;
+   color:#9d9fa0;
+   font-size:15px;
+    font-family: 'NanumSquare', sans-serif;
+   padding-left: 15%;
+   padding-top: 40px;
+   padding-bottom: 10px;
+   border-top: 0.5px solid #333333;
+  }
+
+  
+  
+
+
+  /* topNavi */
+  .logg {
+   padding: 15px;
+   align-items: center;
+   float: left; 
+  }
+
+  .title {
+   align-items: center;
+   float: left;
+   font-size: 20px;
+    font-family: 'NanumSquare', sans-serif;
+   font-weight: 800;
+  }
+  
+  
+   .logo_top{
+      padding-left: 15%;
+   }
+   .logo{
+      width: 400px;   
+   }
+   
+  .aaa {
+     padding-right: 15%;
+     padding-top: 1%;
+     padding-bottom: 1%;
+  }
+
+  .info_txt {
+   font-family: 'NanumSquare', sans-serif;
+   font-size: 17px;
+   color: #FFFFFF;
+  }
+
+  a:link {
+   font-family: 'NanumSquare', sans-serif;
+   color : #FFFFFF;
+   text-decoration: none;
+   font-size: 25px;
+  }
+  a:visited {
+     color : #FFFFFF;
+     font-weight: bold;
+  }
+  a:hover{
+     color:#FCBE32;
+  }
+
+
+  img {
+   display: block;
+   height: auto;
+  }
+  
+/* 로그인 */
+#login_wrapper {
+   font-family: 'NanumSquare', sans-serif;
+   font-weight: 800;
+}
