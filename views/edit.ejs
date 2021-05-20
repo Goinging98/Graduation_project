@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <style>
+      .hbox-menu { margin-top:4px; width:20%;  }
+      .hbox-menu li { float: left; width:20%; }
+       
+       .hbox-menu li:last-child a { border-right: 0; } 
+      </style>
+
+   <title>Incizor Analysis</title>
+   <link rel="stylesheet" href="/Stylesheets/main.css">
+   <link rel="stylesheet" href="/Stylesheets/main0.css">
+   <meta charset="utf-8">
+</head>
+<body>
+<header>
+   <%- include ("./top_logo") %>
+</header>
+
+
+
+<!-- 콘텐츠 영역 -->
+<div id="container">
+   <!-- sideMenu -->
+   <nav>
+      <div class="box" style="background: #BDBDBD;">
+          <img class="profile" id="iamgeulr" style="object-fit: contain;" src="">
+          <script>
+              var i =0;
+              
+              if("<%=user.provider%>" == "naver"){
+                  url =  "<%=user._json.profile_image%>"
+              }
+              else if("<%=user.provider%>" == "google"){
+                  url = "<%=user._json.picture%>"
+              }else{
+                  url = "<%=user._json.thumbnail_image%>"
+              }
+              if(!url){
+                  url = "/img/IMG_0071.png"
+              }
+              var link = document.getElementById('iamgeulr'); 
+              link.src = url;
+          </script>
+
+      </div>
+      <p style="text-align: center;"><%=user.displayName%> 님</p>
+      <%- include ("./sideMenu") %>
+      </nav>
+
+
+      <div class = "page">
+         <div class="container" style="float:right;">
+            <form action="/:keyword" method="get" id="title">
+            <div class="form-group">
+               
+               <input type="text" name="title" placeholder="계약서검색" class="form-control"/>
+            <button type="submit"><img src="/img/검색이모티콘.png" width="20px"></button>
+               
+            </div>
+            </form>   
+          </div>
+
+
+<br><br>
+   
+   <!-- 왼쪽 -->   
+   <div class = "page">
+      <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/uploadSuccess">
+         <div class="form-group" style="border: 1px solid black;width: 70%;margin-left: 14%;">
+               <h1 style="margin-left: 10%; ">문서 업로드
+               <input type="file" style="margin-left: 10%; " class="form-control"  name="uploadFile" multiple/>
+               <input type="text" name="name" class="form-control" placeholder="Enter name of contract" required />
+               <input class="btn btn-primary" type="submit" value="Upload"/></h1>
+         </div>
+      </form>
+      
+      <p style="text-align: center;font-size: 50px;"><b>전체계약서</b></p>
+
+      <table class="type111">
+         <thead>
+         <tr>
+            <th scope="cols">이름</th>
+           
+            <th scope="cols">업로드 일자</th>
+            <th scope="cols">분석</th>
+            <th scope="cols">미리보기</th>
+            <th scope="cols">삭제</th>
+         </tr>
+         </thead>
+         <tbody>    
+            <% var count = 0 %>
+            <% for (var i = 0; i < data.length; i++) {%>
+               <% for (var j = 0; j < extract.length; j++) {%>
+                  <%if ((data[i]._id).toString() == (extract[j]._id).toString()){%>
+                     <%count += 1;%>
+                  <%}%>   
+               <%}%>
+            <%if(count>=1){%>
+            <%if (data[i]._id == x){%>
+                  <tr>
+                        <td>
+                            <form action="/edit/<%= data[i]._id %>" method="post">
+                                <span>
+                                  <input
+                                    type="text"
+                                    name="title"
+                                    placeholder="Insert a title"
+                                    value="<%= data[i].title %>"
+                                    class="form-control"
+                                    style="width: 150px;height: 30px;"
+                                  />
+                                  <button type="submit" class="btn btn-primary btn-block">
+                                    Edit
+                                  </button>
+                                </span>
+                              </form>
+    
+                            </th> <%}else{%>
+                            <td><a href="contracts/<%=data[i].id %>"> <%= data[i]["title"] %></a></th> <%} %>
+
+
+
+                        <td><span><%= (data[i].added_date).toLocaleDateString()%></span></th>
+                     
+                     <td><span>분석완료</span></th>
+                     <td><a>보기</a></th>
+                     <td><button type="button" onclick="location.href= '/contracts/<%=data[i].id %>/<%=data[i].user%>/delete'">삭제</button></th>
+                  </tr>
+               <%}else{%>
+                  <%if (data[i]._id == x){%>
+                  <tr>
+                        <td>
+                           <form action="/edit/<%= data[i]._id %>" method="post">
+                              <span>
+                                <input
+                                  type="text"
+                                  name="title"
+                                  placeholder="Insert a title"
+                                  value="<%= data[i].title %>"
+                                  class="form-control"
+                                  style="width: 150px;height: 30px;"
+                                />
+                                <button type="submit" class="btn btn-primary btn-block">
+                                  Edit
+                                </button>
+                              </span>
+                            </form>
+                        </th><%}else{%>
+                        <td><a href="contracts/<%=data[i].id %>"> <%= data[i]["title"] %></a></th> <%} %>
+
+
+                     <td><span><%= (data[i].added_date).toLocaleDateString()%></span></th>
+                       
+                     <td><button type="button" onclick="location.href= '/extract/<%=data[i].id %>/<%=data[i].user%>'">분석하기</button></th>
+                     <td><a>보기</a></th>
+                     <td><button type="button" onclick="location.href= '/contracts/<%=data[i].id %>/<%=data[i].user%>/delete'">삭제</button></th>
+                  </tr>
+               <%}%>
+               <%count = 0;%>
+               
+            <%}%>
+   
+           
+         </tbody>
+      </table>
+      <center>
+      <ul class="hbox-menu">
+         <% var offset = 3; %>
+         <% for(i=1;i<=maxPage;i++){ %>
+           <% if(i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))){ %>
+            <% if(i != page){ %>
+              <li style='list-style:none;'>[<a href="/contracts?page=<%= i %>"> <%= i %> </a>]</li>
+            <% } else { %>
+              <li style='list-style:none'>[ <b><%= i %></b> ]</li>
+            <% } %>
+           <% } else if(i == offset+1 || i == maxPage-offset){ %>
+              <li style='list-style:none'>...</li>
+           <% } %>
+         <%}%>
+        </ul>
+      </center>
+   </div>
+
+</div>
+
+
+</body>
+</html>
+
+
+

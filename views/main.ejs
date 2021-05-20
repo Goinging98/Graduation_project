@@ -1,0 +1,210 @@
+<!doctype html>
+
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Incizor Analysis</title>
+	<link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.css">
+	<script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
+	<link rel="stylesheet" href="/Stylesheets/main.css">
+   <script type="text/JavaScript" src="/Stylesheets/d3.v3.min.js"></script>
+     <script type="text/JavaScript"  src="/Stylesheets/colorbrewer.js"></script>
+   <script src="https://d3js.org/d3.v4.js"></script>
+   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	<style>
+		svg {
+    		border: 1px solid;
+		}
+		.text {
+			fill: white;
+			font-weight: bold;
+		}
+	</style>
+	<script>
+		function init() {
+			scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+			scheduler.init("scheduler_here", new Date(), "month");
+			// enables the dynamic loading
+			scheduler.setLoadMode("day");
+
+			// load data from backend
+			scheduler.load("/main/data", "json");
+			// connect backend to scheduler
+			var dp = new dataProcessor("/main/data");
+			// set data exchange mode
+			dp.init(scheduler);
+			dp.setTransactionMode("POST", false);
+		}
+	</script>
+</head>
+
+<body onload="init();">
+	<!-- header 영역 -->
+<!-- header 영역 -->
+<header>
+    <%- include ("./top_logo") %>
+</header>
+
+<!-- navigation bar -->
+
+
+<!-- 콘텐츠 영역 -->
+<div id="container">
+    <!-- sideMenu -->
+    <nav>
+        <div class="box" style="background: #BDBDBD;">
+            <img class="profile" id="iamgeulr" style="object-fit: contain;" src="">
+            <script>
+                var i =0;
+                
+                if("<%=user.provider%>" == "naver"){
+                    url =  "<%=user._json.profile_image%>"
+                }
+                else if("<%=user.provider%>" == "google"){
+                    url = "<%=user._json.picture%>"
+                }else{
+                    url = "<%=user._json.thumbnail_image%>"
+                }
+                if(!url){
+                    url = "/img/IMG_0071.png"
+                }
+                var link = document.getElementById('iamgeulr'); 
+                link.src = url;
+            </script>
+
+        </div>
+        <p style="text-align: center;"><%=user.displayName%> 님</p>
+        <%- include ("./sideMenu") %>
+        </nav>
+
+		 
+			<!-- 왼쪽 사이드 -->
+			<aside>
+				<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:755px;'>
+					<div class="dhx_cal_navline">
+						<div class="dhx_cal_prev_button">&nbsp;</div>
+						<div class="dhx_cal_next_button">&nbsp;</div>
+						<div class="dhx_cal_today_button"></div>
+						<div class="dhx_cal_date"></div>
+						<div class="dhx_cal_tab" name="day_tab"></div>
+						<div class="dhx_cal_tab" name="week_tab"></div>
+						<div class="dhx_cal_tab" name="month_tab"></div>
+					</div>
+					<div class="dhx_cal_header">
+					</div>
+					<div class="dhx_cal_data">
+					</div>
+				</div>
+			</aside>
+			<!-- 본문 영역 -->
+			<article>
+			  <h2 id='analysis_h2'>진행 중인 계약서 위험도 상황</h2>
+			  <svg id="my_dataviz2" width="500" height="300"></svg> 
+		 
+			  <h2 id='analysis_h2'>완료된 계약서 위험도 상황</h2>
+			  <svg id="my_dataviz" width="500" height="300"></svg>
+			</article>
+		 </div>
+	
+
+</body>
+<script>
+    var result = "<%=finish%>";
+    var data = result.split(',');
+    var a = data[0];
+    var b = data[1];
+    var c = data[2];
+     var dataset = [ {x : '안전', y : a}
+                   , {x : '주의', y : b}
+                   , {x : '위험', y : c}];
+    console.log(dataset);
+
+     var svg = d3.select("#my_dataviz");
+     var colors = ["#8FBC2A", "#E5B62B", "#BE3035"];
+     var width  = parseInt(svg.style("width"), 10) -30;
+     var height = parseInt(svg.style("height"), 10) -25;
+     var svgG = svg.append("g")
+         .attr("transform", "translate(15, 0)");
+     var xScale = d3.scaleBand()
+         .domain(dataset.map(function(d) { return d.x;} ))
+         .range([0, width]).padding(0.2);
+     var yScale = d3.scaleLinear()
+         .domain([0, d3.max(dataset, function(d){ return d.y; })])
+         .range([height, 0]);
+  
+     svgG.selectAll("rect")
+         .data(dataset)
+         .enter()
+         .append("rect")
+             .attr("class", "bar")
+             .attr("fill", function(d,i){ return colors[i]})
+             .attr("height", function(d, i) {return height-yScale(d.y)})
+             .attr("width", xScale.bandwidth())
+             
+             .attr("x", function(d, i) {return xScale(d.x)})
+             .attr("y", function(d, i) {return yScale(d.y)});
+  
+     svgG.selectAll("text")
+         .data(dataset)
+         .enter()
+         .append("text")
+         .text(function(d) {return d.y})
+             .attr("class", "text")
+             .attr("x", function(d, i) {return xScale(d.x)+xScale.bandwidth()/2})
+             .style("text-anchor", "middle")
+             .attr("y", function(d, i) {return yScale(d.y) + 15});
+  
+     svgG.append("g")
+         .attr("transform", "translate(0," + (height) + ")")
+         .call(d3.axisBottom(xScale))
+         .style("font-size", "14px");
+ </script>
+
+<script>
+   var result = "<%=con%>";
+   var data = result.split(',');
+   var a = data[0];
+   var b = data[1];
+   var c = data[2];
+   var dataset = [ {x : '안전', y : a}
+                  , {x : '주의', y : b}
+                  , {x : '위험', y : c}];
+   console.log(dataset);
+    var svg = d3.select("#my_dataviz2");
+    var width  = parseInt(svg.style("width"), 10) -30;
+    var height = parseInt(svg.style("height"), 10) -25;
+    var svgG = svg.append("g")
+        .attr("transform", "translate(15, 0)");
+    var xScale = d3.scaleBand()
+        .domain(dataset.map(function(d) { return d.x;} ))
+        .range([0, width]).padding(0.2);
+    var yScale = d3.scaleLinear()
+        .domain([0, d3.max(dataset, function(d){ return d.y; })])
+        .range([height, 0]);
+ 
+    svgG.selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+            .attr("class", "bar")
+            .attr("fill", function(d,i){return colors[i]})
+            .attr("height", function(d, i) {return height-yScale(d.y)})
+            .attr("width", xScale.bandwidth())
+            .attr("x", function(d, i) {return xScale(d.x)})
+            .attr("y", function(d, i) {return yScale(d.y)});
+ 
+    svgG.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .text(function(d) {return d.y})
+            .attr("class", "text")
+            .attr("x", function(d, i) {return xScale(d.x)+xScale.bandwidth()/2})
+            .style("text-anchor", "middle")
+            .attr("y", function(d, i) {return yScale(d.y) + 15});
+ 
+    svgG.append("g")
+        .attr("transform", "translate(0," + (height) + ")")
+        .call(d3.axisBottom(xScale))
+        .style("font-size", "14px");
+
+</script>

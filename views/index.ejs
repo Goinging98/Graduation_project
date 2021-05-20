@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Incizor Analysis</title>
+   
+
+    <!-- AOS 라이브러리 불러오기-->
+   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="/Stylesheets/home.css">
+</head>
+
+<body>
+   <!-- 스크립트로 초기화 -->
+    <script> 
+      AOS.init(); 
+    </script>
+<header>
+   <%- include ("./topNavi") %>
+</header>
+
+
+<!-- 첫번째 소개멘트  -->
+<div class="container" style="background-color: #011638; padding-top: 110px;"> 
+   <div class="row" data-aos="fade-up" data-aos-once='true' data-aos-duration=500>
+     <div class="column-66">
+      <p class="txt_white">
+         Contract Review and Data 
+         <br> Extraction Powered by AI
+      </p>
+      <p class="explain_white" >
+         서류 더미에 묻힌 가치를 발굴하는 경험
+         <br>인사이저와 함께 하세요!
+      </p>
+     </div>
+     <div class="column-33">
+        <img src="./img/screenpic.png" width=600 height=auto>
+     </div>
+   </div>
+  </div>
+  
+  <!-- 인사이저 서비스 설명  -->
+  <div class="container" style="background-color:#F8F8F8">
+   <div class="row">
+        <div data-aos="fade-up" align="center">
+         <p class="txt_black"><b>인사이저</b></p>
+         <p class="explain_black" align="center">
+            인사이저에서 개발한 문서의 주요 데이터 추출 기능을 사용해
+            <br>‘밥먹고 뭐하니’는 인사이저 기능을 사용하여 계약서 관리 웹 서비스를 제공합니다.
+            <br><br>
+         </p>
+        </div>
+        
+      <div class='video'>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/XxF1zeo1-rs" 
+            title="YouTube video player" frameborder="0" allowfullscreen >
+            </iframe>
+      </div>
+   </div>
+  </div>
+  
+
+  <!-- 1분만에 알 수 있는 계약정보  -->
+  <div class="container" style="background-color: #ffffff;">
+   <div class="row">
+      <div class="column-33"  data-aos="fade-right" >
+        <p class="txt_black" align='left'>
+           1분 만에 알 수 있는<br>계약 정보
+        </p>
+        <p class='explain_black' align='left'>
+           계약서를 업로드하여 계약일, 계약금 등 <br>
+           다양한 정보를 한번에 파악할 수 있습니다.</p>
+      </div>
+       <div class="column-66_big"  data-aos="fade-left">
+        <img src="/img/magnifier.png" width="450">
+       </div>
+   </div>
+   </div>
+  </div>
+
+  <!-- 손쉬운 계약 문서 관리  -->
+  <div class="container" style="background-color: #f8f8f8;">
+   <div class="row">
+     <div class="column-33"  data-aos="fade-right">
+        <img src="/img/computer.jpeg" width="700" height=auto>
+     </div>
+     <div class="column-66"  data-aos="fade-left" >
+      <p class="txt_black" align='right'>
+         손쉬운 계약 문서 관리
+      </p>
+      <p class='explain_black' align='right'>
+         진행중인 계약서, 완료된 계약서 폴더로  
+         <br>계약서를 구분할 수 있습니다.</p>
+     </div>
+   </div>
+   </div>
+  </div>
+
+
+  <!-- 간결한 로그인 철저한 보안 -->
+  <div class="container" style="background-color: #ffffff;">
+   <div class="row">
+      <div class="column-66"  data-aos="fade-left" >
+        <p class="txt_black" align='left'>
+           간결한 로그인, 철저한 보안
+        </p>
+        <p class='explain_black' align='left'>
+           계약 문서는 데이터베이스에 안전하게 보관되어<br>분실의 위험으로부터 안심할 수 있습니다. 
+        </p>
+      </div>
+     <div class="column-33_big"  data-aos="fade-right">
+        <img src="/img/database_docu.png" width="500" >
+     </div>
+   </div>
+   </div>
+  </div>
+
+  <!-- 서비스 이용해보세요 박스   -->
+  <div class="container" style="background-color: #F8F8F8;">
+   <div class="bellow_box" style="background-color: #011638;" 
+      data-aos="fade-up" data-aos-duration="500" data-aos-once="false">
+      <p class="txt_white" align='center'>
+         지금 시작하세요! <br>    문서 관리의 패러다임이 바뀝니다. 
+      </p>
+      <a href="auth/login" >
+         <div class="button">서비스를 이용해보세요</div>
+      </a>
+   </div>
+   </div>
+  </div>
+
+
+  <div class='address'>
+     <img src="./img/incizor.png" width="130" height="65" class="incizor_logo" align='left'>
+     <br><br>
+     <p>서울특별시 마포구 서교동 양화로 161 케이스퀘어 6층 인사이저 <br>
+      Copyright © 201 8  INCIZOR All Rights Reserved</p>
+  </div>
+
+</body>
+</html>

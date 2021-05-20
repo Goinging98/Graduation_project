@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Incizor Analysis</title>
+    <link rel="stylesheet" href="/Stylesheets/main.css">
+</head>
+<style>
+    input {
+        vertical-align: middle;
+      }
+      input.form-text {
+        border: 1px solid #0f0e0e;
+        height: 28px;
+      }
+      input.img-button {
+        top: 40px;
+        left: 40px;
+        background: url( "/img/back.png" ) no-repeat;
+        border: none;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+      #titleh2 {
+        display: block;
+        color: white;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        margin-inline-start: 0px;
+        padding-top: 15px;
+        align-items: center;
+        margin-inline-end: 0px;  
+    }
+    table.type1 {
+        width: 90%;
+        margin-left:auto; 
+        margin-right:auto;
+    }
+    table.type1 th {
+        width: 155px;
+        font-weight: bold;
+        vertical-align: top;
+        text-align: left;
+        color: rgb(7, 7, 7);
+        background: #fffeff ;
+    }
+    table.type1 td {
+        text-align: left;
+        width: 155px;
+        background: rgb(255, 255, 255);
+    }
+    h4 {
+        display: block;
+        font-size: 1em;
+        margin-block-start: 0.1em;
+        margin-block-end: 0.1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;    
+    }
+    
+</style> 
+<body>
+    <!-- header 영역 -->
+    <header>
+        <%- include ("./top_logo") %>     
+    </header>
+ 
+    <!-- 콘텐츠 영역 -->
+    <div id="analysis_container">
+        <!-- sideMenu -->
+        <nav id='analysis_nav'>
+            <div class="box" style="background: #BDBDBD;">
+                <img class="profile" id="iamgeulr" style="object-fit: contain;" src="">
+                <script>
+                    var i =0;
+                    var url = "/img/IMG_0071.png"
+                    var array = ["<%=user._json.picture%>", "<%=user._json.profile_image%>", "/img/IMG_0071.png"]
+                    while(i<3){
+                        if(!array[i]){
+                            i= i+1;
+                        }
+                        else{
+                            url = array[i];
+                            break;
+                        }
+                    }
+                    var link = document.getElementById('iamgeulr'); 
+                    link.src = url;
+                </script>
+    
+            </div>
+            <p style="text-align: center;"><%=user.displayName%> 님</p>
+            <%- include ("./sideMenu") %>
+            
+        </nav>     
+    </div>
+        <div id= 'back'>
+            <input type="button" class = 'img-button' onclick="history.back()"  style="margin-top: 0.8%;margin-left: 1%;">
+        </div>
+
+        <div id='pdf_name_Bar'>
+            <h2 id="titleh2" style="text-align:center"><%=data[0].title%></h2>
+        </div>
+        <div id='pdf_name_Bar2'>
+        </div>
+        <div id='left'>
+            <embed id="dynamiclink" src="" type='application/pdf' width="100%" height="100%"/>
+                    <script>
+                        var pdf_name = "<%=data[0].pdf_name%>";
+                        var image_url = "<%=image_url%>"
+                        var url = image_url + pdf_name;
+                        var link = document.getElementById('dynamiclink'); 
+                        link.src = image_url + pdf_name;
+                    </script> 
+
+        </div>
+
+        
+        <div id='right'>
+            
+
+            <table class="type1">
+                <tr><th colspan="2"><h1 style="text-align:center">계약서분석현황</h2></th></tr>
+                <tr>
+                    <th>
+                        <h2>1.날짜</h2>
+                    </th>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <h4>계약시작일 </h4> 
+                    </td>
+                    <td>
+                        <h4><%= extract[0].startDate %></h4>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <h4>계약종료일  </h4>
+                    </td>
+                    <td>
+                        <h4><%= extract[0].endDate %></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>계약일   </h4>
+                    </td>
+                    <td>
+                        <h4><%= extract[0].contractDate %></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>계약서 진행률 &nbsp
+                            <span class="help-tip" style="float:right;margin-right: 48%;">
+                                <p style="line-height:0.5cm">계약종료일과 현재시점을 비교해서
+                                    <br>남은 계약일을 보여줍니다.
+                                </p>
+                            </span>
+                        </h4>
+                        
+                    </td>
+                    <td>
+                        <div id="Progress_Status">
+                            <div id="myprogressBar"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <hr style="margin-top: 30px;">
+            <table class="type1">
+                <tr>
+                    <th>
+                        <h2>2.금액
+                            <span class="help-tip" style="float:right;margin-right: 62%;margin-top: 3.5%;">
+                                <p style="line-height:0.5cm">조회불가인 경우 계약서상 나오지 않는 항목입니다.
+                                     
+                                </p>
+                            </span>
+                        </h2>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>착수금   </h4>
+                    </td>
+                    <td>
+                        <h4>&nbsp&nbsp&nbsp<%= extract[0].deposit %></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>중도금   </h4>
+                    </td>
+                    <td>
+                        <h4>&nbsp&nbsp&nbsp<%= extract[0].secondPayment %></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>잔금  </h4>
+                    </td>
+                    <td>
+                        <h4>+  <%= extract[0].balance %></h4>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                        <h4>계약금  
+                            <span class="help-tip" style="float:right;margin-right: 70%;">
+                                <p style="line-height:0.5cm">착수금, 중도금, 잔금의 합계입니다.
+                                     
+                                </p>
+                            </span>
+                         </h4>
+                    </td>
+                    <td>
+                        <hr>
+                        <h4>&nbsp&nbsp&nbsp<%= extract[0].downPayment %></h4>
+                    </td>
+                </tr>
+            </table>
+            <hr style="margin-top: 30px;">
+            <table class="type1">
+                <tr>
+                    <th>
+                        <h2>3. 위험도
+                            <span class="help-tip" style="float:right;margin-right: 50%;margin-top: 3.5%;">
+                                <p style="line-height:0.5cm;width: 320px;">계약서를 종합평가하여 3가지 항목으로 분류됩니다. 
+                                <br>주의와 위험인 경우 계약서의 문제점을 보여줍니다.</p>
+                            </span>
+                        </h2>
+                    </th>
+                    <td>
+                        <h4 id="demo" style="text-align: center;padding-top: 2%;">ddff</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h4> <%if(extract[0].startrisk=='red'){%>계약시작일: <%=extract[0].startreference%> <%} %> </h4>
+                        <h4><%if(extract[0].endrisk=='red'){%>계약종료일:<%=extract[0].endreference%> <%} %></h4>
+                        <h4><%if(extract[0].dayrisk=='red'){%>계약일:<%=extract[0].dayreference%><%} %></h4>
+                        <h4><%if(extract[0].depositrisk=='red'){%>착수금: <%=extract[0].depositreference%><%} %></h4>
+                        <h4><%if(extract[0].secondPaymentrisk=='red'){%>중도금: <%=extract[0].secondPaymentreference%><%} %></h4>
+                        <h4><%if(extract[0].balencerisk=='red'){%>잔금: <%=extract[0].balencereference%><%} %></h4>
+                        <h4><%if(extract[0].moneyrisk=='red'){%>계약금: <%=extract[0].moneyreference%><%} %></h4>
+
+                        <h4><%if(extract[0].depositrisk=='yellow'){%>착수금: <%=extract[0].depositreference%><%} %></h4>
+                        <h4><%if(extract[0].secondPaymentrisk=='yellow'){%>중도금: <%=extract[0].secondPaymentreference%><%} %></h4>
+                        <h4><%if(extract[0].balencerisk=='yellow'){%>잔금: <%=extract[0].balencereference%><%} %></h4>
+                        <h4><%if(extract[0].moneyrisk=='yellow'){%>계약금: <%=extract[0].moneyreference%><%} %></h4>
+                    </td>
+                </tr>
+                
+            </table>
+       
+                </div>
+            <script>
+                var text = "";
+                if("<%=extract[0].risk%>" == "green"){
+                    var text = "안전";
+                    document.getElementById('demo').style.backgroundColor = "#8FBC2A";
+                    document.getElementById('demo').style.height="27px";
+                    document.getElementById('demo').style.width="60%";
+                }else if("<%=extract[0].risk%>" == "red"){
+                    var text = "매우위험";
+                    document.getElementById('demo').style.backgroundColor = "#BE3035";
+                    document.getElementById('demo').style.height="27px";
+                    document.getElementById('demo').style.width="60%";
+                }else{
+                    var text = "주의"
+                    document.getElementById('demo').style.backgroundColor = "#E5B62B";
+                    document.getElementById('demo').style.height="27px";
+                    document.getElementById('demo').style.width="60%";
+                }
+            
+               document.getElementById("demo").innerHTML = text;
+            </script>
+       
+                </div>
+                <style type='text/css'> 
+                    .help-tip{
+                                         
+                        text-align: center;                 
+                        background-color: #ffffff;                
+                        border-radius: 50%;          
+                        width: 15px;             
+                        height: 15px;                   
+                        font-size: 14px;                   
+                        line-height: 15px;                    
+                        cursor: default;
+                        border: rgb(134, 134, 134) 1px solid;    
+                        margin-top: 1%;              
+                    }               
+                    .help-tip:before{                    
+                        content:'?';                    
+                        font-weight: bold;                   
+                        color:rgb(134, 134, 134);                   
+                    }
+                    .help-tip:hover p{  
+                        display:block;
+                        -webkit-animation: fadeIn 0.3s ease-in-out;
+                        animation: fadeIn 0.3s ease-in-out;
+                    } 
+                    .help-tip p{                    
+                        display: none;                    
+                        background-color: #1E2021;                    
+                        padding: 10px;                    
+                        width: 240px;                    
+                        position: absolute;                    
+                        border-radius: 3px;                   
+                        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);                  
+                        color: #FFF;           
+                        font-size: 13px;               
+                    }       
+                    .help-tip p:before{                   
+                        position: absolute;                   
+                        content: '';                   
+                        width:0;                   
+                        height: 0;                  
+                        border:6px solid transparent;                    
+                        border-bottom-color:#1E2021;                   
+                        left:10px;                    
+                        top:-12px;
+                    }
+                    .help-tip p:after{
+                        width:100%;
+                        height:40px;
+                        content:'';
+                        position: absolute;
+                        top:-40px;
+                        left:0;
+                    }       
+                </style> 
+            
+            <style>
+                #Progress_Status {
+                    width: 60%;
+                    background-color: #ddd;
+                }
+                
+                #myprogressBar {
+                    width: 2%;
+                    height: 30px;
+                    font-size: 7;
+                    background-color: #61d9ee;
+                    text-align: center;
+                    line-height: 32px;
+                    color: black;
+                }
+            </style>
+            <script>
+                var endDate = "<%= (extract[0].endDate)%>"
+                var startDate = "<%= extract[0].startDate%>"
+                var endDateTime = new Date(endDate).getTime()
+                var startDateTime = new Date(startDate).getTime()
+                var compareEndtoStart = endDateTime-startDateTime
+                var currentTime = new Date().getTime()
+                var compareEndtoCurrent = endDateTime-currentTime
+                var currentPercentage = 100 - Math.floor((compareEndtoCurrent / compareEndtoStart)*100)
+
+                if(currentPercentage>=100){
+                    document.getElementById("myprogressBar").style.width = "100%";
+                    document.getElementById("myprogressBar").innerHTML = "100%";
+                }else if(currentPercentage<= 0){
+                    document.getElementById("myprogressBar").style.width = "0%";
+                    document.getElementById("myprogressBar").innerHTML = "0%";
+                }else{
+                    document.getElementById("myprogressBar").style.width = currentPercentage.toString() + '%';
+                    document.getElementById("myprogressBar").innerHTML = currentPercentage.toString() + '%';
+                }   
+               
+            </script>
+        </div>
+ 
+</body>
+</html>

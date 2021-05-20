@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Incizor Analysis</title>
+    <link rel="stylesheet" href="/Stylesheets/main.css">
+</head>
+<style>
+     input {
+        vertical-align: middle;
+      }
+      input.form-text {
+        border: 1px solid #0f0e0e;
+        height: 28px;
+      }
+      input.img-button {
+        top: 40px;
+        left: 40px;
+        background: url( "/img/back.png" ) no-repeat;
+        border: none;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+
+</style>
+<body>
+    
+    <!-- header 영역 -->
+    <header>
+        <%- include ("./top_logo") %>
+    </header>
+    
+    <!-- 콘텐츠 영역 -->
+    <div id="container">
+        <!-- sideMenu -->
+        <nav>
+            <div class="box" style="background: #BDBDBD;">
+                <img class="profile" id="iamgeulr" style="object-fit: contain;" src="">
+                <script>
+                    var i =0;
+                    
+                    if("<%=user.provider%>" == "naver"){
+                        url =  "<%=user._json.profile_image%>"
+                    }
+                    else if("<%=user.provider%>" == "google"){
+                        url = "<%=user._json.picture%>"
+                    }else{
+                        url = "<%=user._json.thumbnail_image%>"
+                    }
+                    if(!url){
+                        url = "/img/IMG_0071.png"
+                    }
+                    var link = document.getElementById('iamgeulr'); 
+                    link.src = url;
+                </script>
+    
+            </div>
+            <p style="text-align: center;"><%=user.displayName%> 님</p>
+            <%- include ("./sideMenu") %>
+            </nav>
+        
+       
+        <input type="button" class = 'img-button' onclick="history.back()" style="margin-top: 1%;margin-left: 1%;">
+        <embed id="dynamiclink" src="" type='application/pdf' width="50%" height="90%" style="margin-left:13%;margin-top: 30px;"/>
+        <script>
+            var pdf_name = "<%=data[0].pdf_name%>";
+            var image_url = "<%=image_url%>"
+            var url = image_url + pdf_name;
+            var link = document.getElementById('dynamiclink'); 
+            link.src = image_url + pdf_name;
+            console.log(url);
+        </script>
+    
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>login</title>
+  <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="stylesheet" type="text/css" href="../Stylesheets/login.css">
+   <header>
+      <%- include ("../topNavi") %>
+   </header>
+</head>
+<style>
+  .my-box{
+    position: center;
+    width: 430px;
+    height: 460px;
+    margin-bottom: 200px;
+    margin-top: 50px;
+    background: #f1f1f1;
+    backdrop-filter: blur(4px);
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
+}
+</style>
+<body>
+
+<div id="login_wrapper" style="padding-top: 100px;">
+  <center>
+  <div id="content" style="width: 300px;">
+      
+    </div>
+    <div class="my-box">
+      <br><br>
+      <h1 style="text-align:center;">소셜 로그인</h1><br><br>
+      <a id="reauthenticate-popup-btn"href='google'>
+        <img src="../img/btn_google.png" width="228">
+       </a>
+       <br>
+      <a id="reauthenticate-popup-btn" href="kakao">
+         <img
+           src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+           width="222"
+         />
+       </a>
+       <br>
+       <a href="naver">
+         <img src="../img/naver_login.png"
+           width="222"
+         />
+       </a>
+
+
+    </div>
+    
+  </center>
+</div>
+
+<div class='address'>
+  <img src="../img/incizor.png" width="130" height="65" class="incizor_logo" align='left'>
+  <br><br>
+  <p>서울특별시 마포구 서교동 양화로 161 케이스퀘어 6층 인사이저 <br>
+  Copyright © 201 8  INCIZOR All Rights Reserved</p>
+</div>
+
+
+</body>
+</html>

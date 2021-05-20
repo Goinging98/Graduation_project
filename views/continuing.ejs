@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Incizor Analysis</title>
+   <link rel="stylesheet" href="/Stylesheets/main.css">
+   <link rel="stylesheet" href="/Stylesheets/main0.css">
+   <meta charset="utf-8">
+</head>
+<body>
+<!-- header 영역 -->
+<header>
+   <style>
+      input {
+           vertical-align: middle;
+         }
+         input.form-text {
+           border: 1px solid #0f0e0e;
+           height: 28px;
+         }
+         input.img-button {
+           background: url( "/img/pen.png" ) no-repeat;
+           border: none;
+           width: 20px;
+           height: 20px;
+           cursor: pointer;
+         }
+        </style>
+   <%- include ("./top_logo") %>
+</header>
+
+<!-- 콘텐츠 영역 -->
+<div id="container">
+   
+   <!-- sideMenu -->
+   <nav>
+      <div class="box" style="background: #BDBDBD;">
+          <img class="profile" id="iamgeulr" style="object-fit: contain;" src="">
+          <script>
+              var i =0;
+              
+              if("<%=user.provider%>" == "naver"){
+                  url =  "<%=user._json.profile_image%>"
+              }
+              else if("<%=user.provider%>" == "google"){
+                  url = "<%=user._json.picture%>"
+              }else{
+                  url = "<%=user._json.thumbnail_image%>"
+              }
+              if(!url){
+                  url = "/img/IMG_0071.png"
+              }
+              var link = document.getElementById('iamgeulr'); 
+              link.src = url;
+          </script>
+
+      </div>
+      <p style="text-align: center;"><%=user.displayName%> 님</p>
+      <%- include ("./sideMenu") %>
+      </nav>
+      <div class = "page">
+			<div class="container" style="float:right;">
+			   <form action="/b/:keyword2" method="get" id="title">
+			   <div class="form-group">
+				  
+				  <input type="text" name="title" placeholder="계약서검색" class="form-control"/>
+			   <button type="submit"><img src="/img/검색이모티콘.png" width="20px"></button>
+				  
+			   </div>
+			   </form>   
+			 </div>
+
+   <br><br>
+
+   <!-- 왼쪽 -->
+   <div class = "page">
+      <h1 style="text-align: center;margin-right: 7%;">진행 중인 계약서</h1>
+      <table class="type111">
+         <colgroup>
+            <col width = "20%">
+            <col width = "50%">
+            <col width = "30%">
+         </colgroup>
+         <thead>
+         <tr>
+            <th scope="cols">이름</th>
+            <th scope="cols">계약날짜</th>
+            <th scope="cols">삭제</th>
+         </tr>
+         </thead>
+         <tbody>    
+            <% var count = 0 %>
+            <% for (var i = 0; i < data.length; i++) {%>
+               <% for (var j = 0; j < extract.length; j++) {%>
+                  <%if ((data[i]._id).toString() == (extract[j]._id).toString()){%>
+                     <%count += 1;%>
+                  <%}%>   
+               <%}%>
+               <%if(count>=1){%>
+                  <tr>
+                     <td><a href="contracts/<%=data[i].id %>"> <%= data[i]["title"] %></a>  </td>
+                     <td><%= extract[i].startDate%> ~ <%= extract[i].endDate%></td>
+                     <td><button type="button" onclick="location.href= '/continuing/<%=data[i].id %>/<%=data[i].user%>/delete'">삭제</button></th>
+                  </tr>
+               <%}else{%>
+                  <tr>
+                     <td><a href="contracts/<%=data[i].id %>"> <%= data[i]["title"] %></a>   </th>
+                     <td><span  colspan="2"><%= extract[i].startDate%> ~ <%= extract[i].endDate%></span></th>
+                     <td><button type="button" onclick="location.href= '/continuing/<%=data[i].id %>/<%=data[i].user%>/delete'">삭제</button></th>
+                  </tr>
+               <%}%>
+               <%count = 0;%>
+               
+            <%}%>
+   
+           
+         </tbody>
+      </table>
+      <center>
+         <ul class="hbox-menu">
+            <% var offset = 3; %>
+            <% for(i=1;i<=maxPage;i++){ %>
+             <% if(i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))){ %>
+              <% if(i != page){ %>
+               <li style='list-style:none;'>[<a href="/continuing?page=<%= i %>"> <%= i %> </a>]</li>
+              <% } else { %>
+               <li style='list-style:none'>[ <b><%= i %></b> ]</li>
+              <% } %>
+             <% } else if(i == offset+1 || i == maxPage-offset){ %>
+               <li style='list-style:none'>...</li>
+             <% } %>
+            <%}%>
+           </ul>
+         </center>
+
+   </div>
+</div>
+
+</body>
+</html>

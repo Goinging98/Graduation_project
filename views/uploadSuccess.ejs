@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Incizor Analysis</title>
+	<link rel="stylesheet" type="text/css" href="/Stylesheets/main.css">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+<header>
+	<%- include ("./top_logo") %>
+</header>
+<nav>
+	<div class="box" style="background: #BDBDBD;">
+		<img class="profile" id="iamgeulr" style="object-fit: contain;" src="">
+		<script>
+			var i =0;
+			
+			if("<%=user.provider%>" == "naver"){
+				url =  "<%=user._json.profile_image%>"
+			}
+			else if("<%=user.provider%>" == "google"){
+				url = "<%=user._json.picture%>"
+			}else{
+				url = "<%=user._json.thumbnail_image%>"
+			}
+			if(!url){
+				url = "/img/IMG_0071.png"
+			}
+			var link = document.getElementById('iamgeulr'); 
+			link.src = url;
+		</script>
+
+	</div>
+	<p style="text-align: center;"><%=user.displayName%> 님</p>
+	<%- include ("./sideMenu") %>
+	</nav>
+
+<div class = "page">
+<h1>Upload</h1>
+<center>
+	<form action="/uploadSuccess" method="post" id="upload" enctype="multipart/form-data">
+		<input type="file" name="contract" value="">
+		<input type="submit" name="Upload">
+	</form>
+
+	<br><br>
+    <h2>Upload Success!</h2>
+	<table id="list"> 
+		<tr>
+			<td></td>
+			<td>계약서 이름</td>
+			<td>계약 만료기간</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="delete"></td>
+			<td>이름</td>
+			<td>날짜</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="delete"></td>
+			<td>이름</td>
+			<td>날짜</td>
+		</tr>
+	</table>
+</center>
+</div>
+
+</body>
+</html>

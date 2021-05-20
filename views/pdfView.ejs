@@ -1,0 +1,12 @@
+<script>
+    var pdf_name = "<%=data[0].pdf_name%>";
+    var image_url = "<%=image_url%>"
+    var url = image_url + pdf_name;
+</script>
+
+
+<div id="myPdf"></div>
+<script type="text/javascript" src="/Stylesheets/pdfobject.js"></script>
+
+
+<script>PDFObject.embed(url, "#myPdf");</script>
